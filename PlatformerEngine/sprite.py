@@ -24,13 +24,13 @@ class Sprite(pygame.sprite.Sprite):
     def __init__(self, name, file_ext="png", directory="images"):
         """Loads image {name}.{file_ext}"""
         super().__init__()
-        slash_if_directory = "/" * bool(directory)
-        self._set_image(f"{directory}{slash_if_directory}{name}.{file_ext}")
         self.name = name
         self.file_ext = file_ext
         self.directory = directory
         self.poses = {}
         self.animation_manager = None
+        self._add_pose("", "")
+        self.change_pose()
 
     def _set_image(self, image, colorkey=BLACK):
         if type(image) == str:
@@ -53,7 +53,7 @@ class Sprite(pygame.sprite.Sprite):
     def _add_pose(self, name, separator="_"):
         self.poses[name] = pygame.image.load(self.directory + "/" + self.name + separator + name + "." + self.file_ext)
 
-    def change_pose(self, name):
+    def change_pose(self, name=""):
         pose = self.poses[name]
         if type(pose) == pygame.Surface:
             self.animation_manager = None

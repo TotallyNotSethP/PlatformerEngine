@@ -1,5 +1,9 @@
 from PlatformerEngine import Player, constants
 import pygame
+from random import choice
+
+all_players = ["alienYellow", "alienBeige", "alienBlue", "alienGreen", "alienPink"]
+all_poses = ["", "climb", "duck", "hurt", "jump", "stand", "swim", "walk"]
 
 
 def main():
@@ -12,8 +16,8 @@ def main():
 
     done = False
 
-    player = Player()
-    player.change_pose("jump")
+    player = Player(choice(all_players))
+    player.change_pose(choice(all_poses))
     sprites = pygame.sprite.Group()
     sprites.add(player)
 
