@@ -41,14 +41,16 @@ class Sprite(pygame.sprite.Sprite):
             self.image.set_colorkey(colorkey)
         self.rect = self.image.get_rect()
 
-    def _add_animation(self, name, separator="_", frames=None):
-        if frames is None:
-            frames = ["1", "2"]
+    def _add_animation(self, name, separator="_", frame_names=None, fps=5):
+        if frame_names is None:
+            frame_names = ["1", "2"]
 
-        self.poses[name] = []
-        for frame in frames:
-            self.poses[name].append(pygame.image.load(self.directory + "/" + self.name + separator +
-                                                      name + frame + "." + self.file_ext))
+        frames = []
+        for frame in frame_names:
+            frames.append(pygame.image.load(self.directory + "/" + self.name + separator +
+                                            name + frame + "." + self.file_ext))
+
+        self.poses[name] = self.AnimationManager(frames, fps)
 
     def _add_pose(self, name, separator="_"):
         self.poses[name] = pygame.image.load(self.directory + "/" + self.name + separator + name + "." + self.file_ext)
@@ -58,8 +60,8 @@ class Sprite(pygame.sprite.Sprite):
         if type(pose) == pygame.Surface:
             self.animation_manager = None
             self._set_image(pose)
-        elif type(pose) == list:
-            self.animation_manager = self.AnimationManager(pose)
+        elif type(pose) == self.AnimationManager:
+            self.animation_manager = pose
 
     def update(self):
         if self.animation_manager:

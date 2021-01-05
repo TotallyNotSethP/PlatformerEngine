@@ -17,23 +17,47 @@ def main():
     done = False
 
     player = Player(choice(all_players))
-    player.change_pose(choice(all_poses))
+    current_pose = choice(all_poses)
+    player.change_pose(current_pose)
     sprites = pygame.sprite.Group()
     sprites.add(player)
 
     clock = pygame.time.Clock()
+
+    big_font = pygame.font.SysFont('Calibri', 25, True, False)
+    small_font = pygame.font.SysFont('Calibri', 10, True, False)
+
+    controls = big_font.render("C: Change Characters | P: Change Pose/Animation", True, constants.WHITE)
+    notice = small_font.render(""""C" and "P" generate stuff randomly. This means that it is possible things may not """
+                               """change when a key is pressed. Just keep mashing it until it does something :D""",
+                               True, constants.WHITE)
 
     while not done:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 done = True
 
+            elif event.type == pygame.KEYUP:
+                if event.key == pygame.K_c:
+                    player.kill()
+                    player = Player(choice(all_players))
+                    player.change_pose(current_pose)
+                    sprites = pygame.sprite.Group()
+                    sprites.add(player)
+                elif event.key == pygame.K_p:
+                    current_pose = choice(all_poses)
+                    player.change_pose(current_pose)
+
         # TODO: Game logic
 
         screen.fill(constants.BLACK)
 
         sprites.update()
+        player.rect.center = (int(size[0] / 2), int(size[1] / 2))
+
         sprites.draw(screen)
+        screen.blit(controls, [10, 10])
+        screen.blit(notice, [10, 40])
 
         pygame.display.flip()
         clock.tick(60)
