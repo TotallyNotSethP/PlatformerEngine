@@ -12,6 +12,5 @@ Currently in Pre-Alpha Phase...
  * Added Animation System
 
 ### Credits
-Code By Seth Peace
-
-Art By [Kenney.nl](https://kenney.nl)
+ * Code By Seth Peace
+ * Art By [Kenney.nl](https://kenney.nl)
