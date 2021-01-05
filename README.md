@@ -10,3 +10,7 @@ Currently in Pre-Alpha Phase...
 #### 1/5/2020
  * Created Repo
  * Added Animation System
+
+### Credits
+Code By Seth Peace
+Art By [Kenney.nl](https://kenney.nl)
