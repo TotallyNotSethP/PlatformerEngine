@@ -4,9 +4,11 @@
 This is a Platformer Engine created for my Python III class.
 
 ### Status
-Currently in Pre-Alpha Phase...
+This project is currently in the Pre-Alpha Phase...
 
 ### Changelog
 #### 1/5/2020
  * Created Repo
- * Added Animation System
+ * Added Sprite System (w/ Animation!)
+   * Added Player Sprites
+   * Added Ground Tile Sprites

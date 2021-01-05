@@ -1,4 +1,5 @@
-from PlatformerEngine import Player, constants
+from PlatformerEngine import constants
+from PlatformerEngine.sprites import Player
 import pygame
 from random import choice
 
