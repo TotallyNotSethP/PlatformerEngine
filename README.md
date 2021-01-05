@@ -12,3 +12,7 @@ This project is currently in the Pre-Alpha Phase...
  * Added Sprite System (w/ Animation!)
    * Added Player Sprites
    * Added Ground Tile Sprites
+
+### Credits
+ * Code By Seth Peace
+ * Art By [Kenney.nl](https://kenney.nl)
