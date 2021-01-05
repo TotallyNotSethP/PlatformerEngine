@@ -13,4 +13,5 @@ Currently in Pre-Alpha Phase...
 
 ### Credits
 Code By Seth Peace
+
 Art By [Kenney.nl](https://kenney.nl)
