@@ -12,6 +12,9 @@ This project is currently in the Pre-Alpha Phase...
  * Added Sprite System (w/ Animation!)
    * Added Player Sprites
    * Added Ground Tile Sprites
+   
+#### 1/8/2021
+ * Added Pose Calculator For Ground Tiles
 
 ### Credits
  * Code By Seth Peace

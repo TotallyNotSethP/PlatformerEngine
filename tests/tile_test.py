@@ -15,7 +15,7 @@ def main():
     size = (700, 500)
     screen = pygame.display.set_mode(size)
 
-    pygame.display.set_caption("PlatformerEngine Test")
+    pygame.display.set_caption("PlatformerEngine Tileset Test")
 
     done = False
 

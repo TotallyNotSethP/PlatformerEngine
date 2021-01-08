@@ -1,7 +1,7 @@
 from PlatformerEngine import constants
 from PlatformerEngine.sprites import Player
-import pygame
 from random import choice
+import pygame
 
 all_players = ["alienYellow", "alienBeige", "alienBlue", "alienGreen", "alienPink"]
 all_poses = ["", "climb", "duck", "hurt", "jump", "stand", "swim", "walk"]
@@ -13,7 +13,7 @@ def main():
     size = (700, 500)
     screen = pygame.display.set_mode(size)
 
-    pygame.display.set_caption("PlatformerEngine Test")
+    pygame.display.set_caption("PlatformerEngine Animation Test")
 
     done = False
 

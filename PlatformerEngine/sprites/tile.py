@@ -23,3 +23,28 @@ class Tile(Sprite):
         self._add_pose("Left", "")
         self._add_pose("Mid", "")
         self._add_pose("Right", "")
+
+    def calculate_pose(self, above, below, left, right):
+        prev_pose = self.pose
+        if above:
+            if above.pose == "HillLeft":
+                self.change_pose("HillLeft2")
+            elif above.pose == "HillRight":
+                self.change_pose("HillRight2")
+            else:
+                self.change_pose("Center")
+        else:
+            if not left and right and below:
+                self.change_pose("HillLeft")
+            elif left and not right and below:
+                self.change_pose("HillRight")
+            elif not left and not right:
+                self.change_pose()
+            elif not left and not below:
+                self.change_pose("CliffLeft")
+            elif not right and not below:
+                self.change_pose("CliffRight")
+            else:
+                self.change_pose("Mid")
+
+        return self.pose != prev_pose

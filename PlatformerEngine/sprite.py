@@ -28,6 +28,7 @@ class Sprite(pygame.sprite.Sprite):
         self.file_ext = file_ext
         self.directory = directory
         self.poses = {}
+        self.pose = None
         self.animation_manager = None
         self._add_pose("", "")
         self.change_pose()
@@ -57,6 +58,7 @@ class Sprite(pygame.sprite.Sprite):
 
     def change_pose(self, name=""):
         pose = self.poses[name]
+        self.pose = name
         if type(pose) == pygame.Surface:
             self.animation_manager = None
             self._set_image(pose)
