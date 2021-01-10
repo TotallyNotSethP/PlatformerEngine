@@ -32,6 +32,8 @@ class Sprite(pygame.sprite.Sprite):
         self.animation_manager = None
         self._add_pose("", "")
         self.change_pose()
+        self.velocity: tuple[int, int] = (0, 0)
+        self.auto_reset_velocity = True
 
     def _set_image(self, image, colorkey=BLACK):
         if type(image) == str:
@@ -68,3 +70,12 @@ class Sprite(pygame.sprite.Sprite):
     def update(self):
         if self.animation_manager:
             self._set_image(self.animation_manager.get_next_frame())
+        self.rect.x += self.velocity[0]
+        self.rect.y += self.velocity[1]
+        if self.auto_reset_velocity:
+            self.velocity = (0, 0)
+
+    def get_pose(self):
+        if self.pose:
+            return self.pose
+        return f"Default Pose"

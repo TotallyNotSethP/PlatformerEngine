@@ -34,17 +34,20 @@ class Tile(Sprite):
             else:
                 self.change_pose("Center")
         else:
-            if not left and right and below:
+            if (not right) and left and below:
                 self.change_pose("HillLeft")
-            elif left and not right and below:
+            elif right and (not left) and below:
                 self.change_pose("HillRight")
-            elif not left and not right:
+            elif (not left) and (not right) and (not below):
                 self.change_pose()
-            elif not left and not below:
+            elif (not left) and (not below):
                 self.change_pose("CliffLeft")
-            elif not right and not below:
+            elif (not right) and (not below):
                 self.change_pose("CliffRight")
             else:
                 self.change_pose("Mid")
 
         return self.pose != prev_pose
+
+    def __bool__(self):
+        return True

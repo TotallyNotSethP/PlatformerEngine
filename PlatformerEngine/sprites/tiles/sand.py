@@ -1,6 +1,6 @@
 from PlatformerEngine.sprites import Tile
 
 
-class Grass(Tile):
+class Sand(Tile):
     def __init__(self, *args, **kwargs):
-        super().__init__("grass", *args, **kwargs)
+        super().__init__("sand", *args, **kwargs)
