@@ -27,7 +27,10 @@ class Sprite(pygame.sprite.Sprite):
         self.name = name
         self.file_ext = file_ext
         self.directory = directory
-        self.poses = {}
+        try:
+            self.poses
+        except AttributeError:
+            self.poses = {}
         self.pose = None
         self.animation_manager = None
         self._add_pose("", "")

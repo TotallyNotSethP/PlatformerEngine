@@ -1,12 +1,12 @@
-from PlatformerEngine.sprites.tiles import Grass, Sand, Dirt, Castle, Snow
+from PlatformerEngine.sprites.tiles import Grass, Sand, Dirt, Castle, Snow, Empty
 
 GROUND_TILES_DIRECTORY = "../images/tiles/ground"
 
 dictionary = {
     "0": {
-        "class": None,
+        "class": Empty,
         "args": (),
-        "kwargs": {},
+        "kwargs": {"directory": GROUND_TILES_DIRECTORY},
     },
     "1": {
         "class": Grass,
