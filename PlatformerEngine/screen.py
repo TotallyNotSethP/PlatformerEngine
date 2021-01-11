@@ -30,6 +30,7 @@ class Screen:
             for sprite in line:
                 sprite.rect.x, sprite.rect.y = x, y
                 x += sprite.image.get_width()
+            x = 0
 
     def update_sprites(self):
         self.sprite_group.update()

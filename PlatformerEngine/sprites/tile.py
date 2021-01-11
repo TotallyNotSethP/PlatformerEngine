@@ -40,14 +40,17 @@ class Tile(Sprite):
                 self.change_pose("HillRight")
             elif (not left) and (not right) and (not below):
                 self.change_pose()
-            elif (not left) and (not below):
-                self.change_pose("CliffLeft")
             elif (not right) and (not below):
+                self.change_pose("CliffLeft")
+            elif (not left) and (not below):
                 self.change_pose("CliffRight")
             else:
                 self.change_pose("Mid")
 
         return self.pose != prev_pose
+
+    def _set_image(self, image, colorkey=None):
+        super()._set_image(image, colorkey=colorkey)
 
     def __bool__(self):
         return True

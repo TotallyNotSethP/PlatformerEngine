@@ -24,7 +24,7 @@ def main():
         print()
 
     running = True
-    screen = pygame.display.set_mode((700, 500))
+    screen = pygame.display.set_mode((1000, 1000))
     clock = pygame.time.Clock()
 
     while running:
