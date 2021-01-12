@@ -1,6 +1,6 @@
 from PlatformerEngine.sprites.tiles import Grass, Sand, Dirt, Castle, Snow, Empty
 
-GROUND_TILES_DIRECTORY = "../images/tiles/ground"
+GROUND_TILES_DIRECTORY = "images/tiles/ground"
 
 dictionary = {
     "0": {

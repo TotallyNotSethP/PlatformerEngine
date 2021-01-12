@@ -34,18 +34,21 @@ class Sprite(pygame.sprite.Sprite):
         self.pose = None
         self.animation_manager = None
         self._add_pose("", "")
+        self.image = None
+        self.rect = None
         self.change_pose()
         self.velocity: tuple[int, int] = (0, 0)
         self.auto_reset_velocity = True
 
-    def _set_image(self, image, colorkey=BLACK):
+    def _set_image(self, image, colorkey=None):
         if type(image) == str:
-            self.image = pygame.image.load(image)
+            self.image = pygame.image.load(image).convert_alpha()
         elif type(image) == pygame.Surface:
-            self.image = image
+            self.image = image.convert_alpha()
         if colorkey:
             self.image.set_colorkey(colorkey)
         self.rect = self.image.get_rect()
+        self.mask = pygame.mask.from_surface(self.image, 100)
 
     def _add_animation(self, name, separator="_", frame_names=None, fps=5):
         if frame_names is None:
@@ -82,3 +85,6 @@ class Sprite(pygame.sprite.Sprite):
         if self.pose:
             return self.pose
         return f"Default Pose"
+
+    def resize(self, size):
+        self._set_image(pygame.transform.scale(self.image, size))
