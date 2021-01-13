@@ -2,7 +2,6 @@ from PlatformerEngine import GroundTileManager
 from PlatformerEngine.sprites import Player
 from PlatformerEngine.sprites.tiles import Snow
 import pygame
-from copy import copy
 
 PLAYER_HEIGHT = 50
 
@@ -14,6 +13,8 @@ movement_speed = MAX_MOVEMENT_SPEED
 def main():
     global movement_speed
     pygame.init()
+
+    last_pos = []
 
     pygame.display.set_mode((700, 500))
 
@@ -27,8 +28,8 @@ def main():
                                       ground_tile_manager.get_sprite((0, 0)).image.get_height() *
                                       len(ground_tile_manager.sprite_map)))
     clock = pygame.time.Clock()
-    #player = Player([int(screen.get_width() / 2), int(screen.get_height() / 2)])
-    player = Player([0, 0])
+    player = Player([int(screen.get_width() / 2), int(screen.get_height() / 2)])
+    # player = Player([0, 0])
     player_group = pygame.sprite.Group(player)
 
     aspect_ratio = player.image.get_width() / player.image.get_height()
@@ -71,35 +72,26 @@ def main():
                 if not (pygame.key.get_mods() & pygame.KMOD_SHIFT):
                     movement_speed = MAX_MOVEMENT_SPEED
 
-        if w_down:
-            player_relative_movement[1] = -movement_speed
-        if a_down:
-            player_relative_movement[0] = -movement_speed
-        if s_down:
-            player_relative_movement[1] = movement_speed
-        if d_down:
-            player_relative_movement[0] = movement_speed
+        last_pos.append(player.pos[:])
+        if len(last_pos) > 2:
+            last_pos.pop(0)
 
-        prev_pos = None
+        if w_down and player.rect.y > movement_speed - 1:
+            player_relative_movement[1] -= movement_speed
+        if a_down and player.rect.x > movement_speed - 1:
+            player_relative_movement[0] -= movement_speed
+        if s_down and player.rect.y < screen.get_height() - player.image.get_height() - movement_speed - 1:
+            player_relative_movement[1] += movement_speed
+        if d_down and player.rect.x < screen.get_width() - player.image.get_width() - movement_speed - 1:
+            player_relative_movement[0] += movement_speed
 
-        if prev_pos != player.pos:
-            prev_pos = copy(player.pos)
         player.move(player_relative_movement)
+
         for sprite in pygame.sprite.spritecollide(player, ground_tile_manager.sprite_group, False,
                                                   pygame.sprite.collide_mask):
             if type(sprite) == Snow:
-                print("hi", player.pos, prev_pos)
-                if player_relative_movement[0] > 0:
-                    prev_pos[0] -= movement_speed * 2
-                else:
-                    prev_pos[0] += movement_speed * 2
-                if player_relative_movement[1] > 0:
-                    prev_pos[1] -= movement_speed * 2
-                else:
-                    prev_pos[1] += movement_speed * 2
-                player.pos = [prev_pos[0], prev_pos[1]]
-                player_group.update()
-                print("bye", player.pos, prev_pos)
+                player.pos = last_pos[0][:]
+
         ground_tile_manager.update(screen)
         player_group.update()
         player_group.draw(screen)
