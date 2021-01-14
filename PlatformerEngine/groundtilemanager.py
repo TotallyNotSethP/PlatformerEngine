@@ -65,7 +65,7 @@ class GroundTileManager:
         self.move_sprites(screen.get_height())
         self.sprite_group.draw(screen)
 
-    def update(self, screen, color=PlatformerEngine.constants.BLACK):
-        screen.fill(color)
+    def update(self, screen): #, color=PlatformerEngine.constants.BLACK):
+        #screen.fill(color)
         self.update_sprites(screen.get_size())
         self.draw_sprites(screen)

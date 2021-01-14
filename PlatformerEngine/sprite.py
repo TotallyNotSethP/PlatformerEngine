@@ -21,7 +21,7 @@ class Sprite(pygame.sprite.Sprite):
 
             return self.frames[self.frame_index]
 
-    def __init__(self, name, file_ext="png", directory="images"):
+    def __init__(self, name, file_ext="png", directory="images", set_default_img=True):
         """Loads image {name}.{file_ext}"""
         super().__init__()
         self.name = name
@@ -33,10 +33,11 @@ class Sprite(pygame.sprite.Sprite):
             self.poses = {}
         self.pose = None
         self.animation_manager = None
-        self._add_pose("", "")
         self.image = None
         self.rect = None
-        self.change_pose()
+        if set_default_img:
+            self._add_pose("", "")
+            self.change_pose()
         self.velocity: tuple[int, int] = (0, 0)
         self.auto_reset_velocity = True
 
