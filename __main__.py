@@ -9,13 +9,13 @@ PLAYER_HEIGHT = 50
 MIN_MOVEMENT_SPEED = 1
 MAX_MOVEMENT_SPEED = 5
 
-VERSION = "Public Beta v1.0.0 - GNU General Public License"
+VERSION = "Beta Snapshot v1.1.0 - DEVELOPMENT COPY - GNU General Public License"
 
 
 def setup():
     global last_pos, score, running, screen, clock, player, player_group, game_over, score_font, help_font, help_text
     global aspect_ratio, width, w_down, a_down, s_down, d_down, movement_speed, start_time, ground_tile_manager
-    global bg_image, version_text
+    global bg_image, version_text, coin_sound, you_win_sound
     last_pos = []
     score = 0
 
@@ -61,6 +61,11 @@ def setup():
     new_size = (width, height)
     bg_image = pygame.transform.scale(bg_image, new_size)
 
+    coin_sound = pygame.mixer.Sound("sfx/coin_sound.ogg")
+    coin_sound.set_volume(0.25)
+
+    you_win_sound = pygame.mixer.Sound("sfx/you_win_sound.ogg")
+
 
 def text_screen(line1="Astro's", line2="Speedrun", line3="Challenge", subtitle_text="Press Q To Continue",
                 line1_font_size=50, e_callback=None, no_sidebars=False):
@@ -103,6 +108,7 @@ def text_screen(line1="Astro's", line2="Speedrun", line3="Challenge", subtitle_t
                     titlescreenrunning = False
             elif event.type == pygame.QUIT:
                 pygame.quit()
+                quit()
 
         screen.blit(bg_image, (0, 0))
         screen.blit(title1, (int((screen.get_width() / 2) - (title1.get_width() / 2)),
@@ -148,9 +154,13 @@ def text_screen(line1="Astro's", line2="Speedrun", line3="Challenge", subtitle_t
 def main():
     global last_pos, score, running, screen, clock, player, player_group, game_over, score_font, help_font, help_text
     global aspect_ratio, width, w_down, a_down, s_down, d_down, movement_speed, start_time, ground_tile_manager
-    global bg_image
+    global bg_image, coin_sound, version_text, you_win_sound
 
     pygame.init()
+    pygame.mixer.music.load('music/bg_music.mp3')
+    pygame.mixer.music.play(-1)
+    pygame.mixer.music.set_volume(0.5)
+
     setup()
 
     text_screen()
@@ -212,6 +222,7 @@ def main():
             if sprite:
                 player.pos = last_pos[0][:]
             if type(sprite) == Coin:
+                coin_sound.play()
                 if sprite.pose == "Gold":
                     score += 1.5
                 elif sprite.pose == "Silver":
@@ -235,11 +246,19 @@ def main():
 
         pygame.display.flip()
 
+        def main_menu():
+            pygame.mixer.music.set_volume(0.5)
+            text_screen()
+
         if score == 50:
+            pygame.mixer.music.set_volume(0)
+            time.sleep(0.1)
+            you_win_sound.play()
             text_screen("You win!",
                         "You got $50 in",
                         f"just {20 - time_remaining:.2f} seconds!",
-                        "Press Q To Play Again; Press E To Go To The Main Menu", 100, text_screen, True)
+                        "Press Q To Play Again; Press E To Go To The Main Menu", 100, main_menu, True)
+            pygame.mixer.music.set_volume(0.5)
             setup()
             start_time = time.time()
 
@@ -247,10 +266,14 @@ def main():
             player_group.update()
 
         elif score >= 50:
+            pygame.mixer.music.set_volume(0)
+            time.sleep(0.1)
+            you_win_sound.play()
             text_screen("You win!",
                         "You got over $50 in",
                         f"just {20 - time_remaining:.2f} seconds!",
-                        "Press Q To Play Again; Press E To Go To The Main Menu", 100, text_screen, True)
+                        "Press Q To Play Again; Press E To Go To The Main Menu", 100, main_menu, True)
+            pygame.mixer.music.set_volume(0.5)
             setup()
             start_time = time.time()
 
