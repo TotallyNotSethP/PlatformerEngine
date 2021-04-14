@@ -1,15 +1,17 @@
+import time
+
+import pygame
+
 from PlatformerEngine import GroundTileManager, constants
 from PlatformerEngine.sprites import Player, Coin
-from PlatformerEngine.sprites.tiles import Snow
-import pygame
-import time
+
 
 PLAYER_HEIGHT = 50
 
 MIN_MOVEMENT_SPEED = 1
 MAX_MOVEMENT_SPEED = 5
 
-VERSION = "Beta Snapshot v1.1.0 - DEVELOPMENT COPY - GNU General Public License"
+VERSION = "Release v1.1.0 - GNU General Public License"
 
 
 def setup():
@@ -62,7 +64,7 @@ def setup():
     bg_image = pygame.transform.scale(bg_image, new_size)
 
     coin_sound = pygame.mixer.Sound("sfx/coin_sound.ogg")
-    coin_sound.set_volume(0.25)
+    coin_sound.set_volume(0.1)
 
     you_win_sound = pygame.mixer.Sound("sfx/you_win_sound.ogg")
 

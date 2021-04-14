@@ -3,7 +3,7 @@
 This is a Game Engine created for my Python III class.
 
 ## Status
-This project is currently in the Public Beta Phase.
+This project is currently in the Release Phase!!!
 
 ## Credits
    * Code By Seth Peace
