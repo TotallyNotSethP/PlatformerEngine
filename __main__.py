@@ -159,7 +159,7 @@ def main():
     global bg_image, coin_sound, version_text, you_win_sound
 
     pygame.init()
-    pygame.mixer.music.load('music/bg_music.mp3')
+    pygame.mixer.music.load('music/bg_music.ogg')
     pygame.mixer.music.play(-1)
     pygame.mixer.music.set_volume(0.5)
 
